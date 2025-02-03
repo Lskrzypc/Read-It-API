@@ -1,0 +1,44 @@
+{
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+      }
+    }
+  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "import"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto",
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "semi": true,
+        "tabWidth": 2,
+        "printWidth": 120
+      }
+    ],
+    "import/order": ["error", {"newlines-between": "never"}],
+    "security/detect-object-injection": "off",
+    "@typescript-eslint/consistent-type-imports": "error"
+
+  }
+}

@@ -1,4 +1,4 @@
 {
   "ignorePatterns": ["node_modules"],
-  "ignores": ["axios", "dotenv", "mongoose", "zod", "rimraf", "ts-node"]
+  "ignores": ["axios", "rimraf", "ts-node"]
 }

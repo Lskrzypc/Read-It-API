@@ -2,20 +2,21 @@ import express, { json } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 import router from './router';
-import { makeMongoDatabase } from './core/mongo/make-mongo-database';
+import { makeMongoDatabase } from './core/database/mongo/make-mongo-database';
+
+// Load environment variables
+config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
-dotenv.config();
-
+// Initialize the database
 const database = makeMongoDatabase({
   dsn: process.env.MONGO_DSN,
-  databaseName: 'mabibli',
+  databaseName: process.env.MONGO_DATABASE_NAME ?? '',
 });
-
 database.connect();
 
 app.use(helmet());
@@ -25,7 +26,6 @@ app.use(json());
 
 app.use('/api', router);
 
-// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on ${port} port`);
 });

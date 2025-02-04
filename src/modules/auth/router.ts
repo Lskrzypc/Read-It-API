@@ -1,18 +1,8 @@
-import type { Request, Response } from 'express';
 import { Router } from 'express';
+import { registerController } from './controllers/register-controller';
 
 const authenticationRouter: Router = Router();
 
-authenticationRouter.post('/login', (req: Request, res: Response) => {
-  res.json({
-    message: 'Successfully created a new user',
-  });
-});
-
-authenticationRouter.post('/signup', (req: Request, res: Response) => {
-  res.json({
-    message: 'Successfully signed up',
-  });
-});
+authenticationRouter.post('/signup', registerController.register);
 
 export default authenticationRouter;

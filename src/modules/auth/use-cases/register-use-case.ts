@@ -2,7 +2,6 @@ import { hash } from 'bcrypt';
 import type { IUser } from '../../users/model/user-model';
 import User from '../../users/repository/user-repository';
 import type { CreateUserHttpRequest, CreateUserHttpResponse } from '../model/auth-model';
-import { internalServerError } from '../../../core/Errors/errors';
 
 function toFormattedName(name: string) {
   name = name.toLowerCase();
@@ -19,23 +18,18 @@ function toHashedPassword(password: string) {
 }
 
 const registerUseCase = async (data: CreateUserHttpRequest): Promise<CreateUserHttpResponse> => {
-  try {
-    const userData = data;
+  const userData = data;
 
-    userData.lastName = toFormattedName(userData.lastName ?? ''); // In fact, never null as controller validates it
-    userData.firstName = toFormattedName(userData.firstName ?? '');
-    userData.email = toFormattedEmail(userData.email ?? '');
-    userData.password = await toHashedPassword(userData.password ?? '');
+  userData.lastName = toFormattedName(userData.lastName ?? ''); // In fact, never null as controller validates it
+  userData.firstName = toFormattedName(userData.firstName ?? '');
+  userData.email = toFormattedEmail(userData.email ?? '');
+  userData.password = await toHashedPassword(userData.password ?? '');
 
-    const pendingUser = await User.create(userData);
+  const pendingUser = await User.create(userData);
 
-    await pendingUser.save();
+  await pendingUser.save();
 
-    return pendingUser as IUser;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    throw internalServerError(error.message);
-  }
+  return pendingUser as IUser;
 };
 
 export { registerUseCase };

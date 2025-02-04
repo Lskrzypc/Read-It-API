@@ -6,7 +6,8 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 COPY .npmrc ./
-RUN npm ci --omit=dev
+RUN npm install
+RUN npm run build
 COPY ./dist ./dist
 
 USER node

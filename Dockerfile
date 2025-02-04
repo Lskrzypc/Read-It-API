@@ -7,7 +7,6 @@ WORKDIR /usr/app
 COPY package*.json ./
 COPY .npmrc ./
 RUN npm install
-RUN npm run build
 COPY ./dist ./dist
 
 USER node

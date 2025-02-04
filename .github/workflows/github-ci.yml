@@ -78,8 +78,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/readitapi:latest
-            ${{ secrets.DOCKER_USERNAME }}/readitapi:${{ env.VERSION }}
+            lskrzypc/readitapi:latest
+            lskrzypc/readitapi:${{ env.VERSION }}
 
   # deploy_staging:
   #   if: github.ref == 'refs/heads/dev'

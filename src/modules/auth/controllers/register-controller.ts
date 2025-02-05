@@ -15,7 +15,6 @@ const registerController = {
     const createdUser = await registerUseCase(pendingUser);
 
     return res.json(createdUser);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   },
 };
 

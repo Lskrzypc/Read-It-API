@@ -11,7 +11,10 @@ export const createUserSchema = Joi.object({
 });
 
 export type AuthenticateUserHttpRequest = Pick<IUser, 'email' | 'password'>;
-export type AuthenticateUserHttpResponse = Partial<IUser>;
+export type AuthenticateUserHttpResponse = {
+  accessToken: string;
+  _id: string;
+};
 export const authenticateUserSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),

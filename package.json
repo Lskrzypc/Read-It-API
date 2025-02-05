@@ -1,6 +1,6 @@
 {
   "name": "mabibliapi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Restful API for Mabibli App",
   "main": "index.js",
   "scripts": {

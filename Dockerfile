@@ -1,15 +1,20 @@
+# Dockerfile
 FROM node:22-alpine
-
-EXPOSE 8080
 
 WORKDIR /usr/app
 
 COPY package*.json ./
 COPY .npmrc ./
+
 RUN npm install
-COPY ./dist ./dist
+
+COPY tsconfig.json ./
+COPY src ./src
+
+RUN npm run build
 
 USER node
 
-CMD ["node", "./dist/index.js"]
+EXPOSE 8080
 
+CMD ["node", "./dist/index.js"]
